@@ -47,5 +47,30 @@ namespace MSunitTest
         {
             Assert.Throws<ArgumentException>(() => new Phone("John Doe", ""));
         }
+        //testy count
+        [TestMethod]
+        public void Count_PustyPhoneBook_DajeZero()
+        {
+            var phone = new Phone("John Doe", "123456789");
+            Assert.AreEqual(0, phone.Count);
+        }
+
+        [TestMethod]
+        public void AddContact_PhoneBookJestPelny()
+        {
+            var phone = new Phone("John Doe", "123456789");
+            for (int i = 0; i < phone.PhoneBookCapacity; i++)
+            {
+                phone.AddContact($"Contact{i}", $"12345678{i}");
+            }
+            Assert.Throws<InvalidOperationException>(() => phone.AddContact("ExtraContact", "123456789"));
+        }
+        [TestMethod]
+        public void AddContact_PhoneBook_False()
+        {
+            var phone = new Phone("Joe Doe", "123456789"); 
+            Assert.IsTrue(phone.AddContact("Joe Doe", "123456789"));
+            Assert.IsFalse(phone.AddContact("Joe Doe", "123456789"));
+        }
     }
 }
