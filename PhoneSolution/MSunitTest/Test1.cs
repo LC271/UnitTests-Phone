@@ -37,5 +37,15 @@ namespace MSunitTest
         {
             Assert.Throws<ArgumentException>(() => new Phone("John Doe", "3456789"));
         }
+        [TestMethod]
+        public void NiecyfrowyNumerTelefonu_Throws_ArgumentException()
+        {
+            Assert.Throws<ArgumentException>(() => new Phone("John Doe", "12345678a"));
+        }
+        [TestMethod]
+        public void PustyNumerTelefonu_Throws_ArgumentException()
+        {
+            Assert.Throws<ArgumentException>(() => new Phone("John Doe", ""));
+        }
     }
 }
