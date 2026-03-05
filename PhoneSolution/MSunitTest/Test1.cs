@@ -1,4 +1,5 @@
 ﻿using ClassLibrary;
+using System.Numerics;
 
 namespace MSunitTest
 {
@@ -68,9 +69,24 @@ namespace MSunitTest
         [TestMethod]
         public void AddContact_PhoneBook_False()
         {
-            var phone = new Phone("Joe Doe", "123456789"); 
+            var phone = new Phone("Joe Doe", "123456789");
             Assert.IsTrue(phone.AddContact("Joe Doe", "123456789"));
             Assert.IsFalse(phone.AddContact("Joe Doe", "123456789"));
+        }
+        // Call
+        [TestMethod]
+        public void Call_ZawieraKontakt()
+        {
+            var phone = new Phone("John Doe", "123456789");
+            phone.AddContact("John Doe", "123456789");
+            string result = phone.Call("John Doe");
+            Assert.AreEqual("Calling 123456789 (John Doe) ...", result);
+        }
+        [TestMethod]
+        public void Call_NieistniejeKontakt()
+        {
+            var phone = new Phone("John Doe", "123456789");
+            Assert.Throws<InvalidOperationException>(() => phone.Call("I don't exist!"));
         }
     }
 }
